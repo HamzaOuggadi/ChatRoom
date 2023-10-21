@@ -18,7 +18,7 @@ public class ClientApp extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         Image icon = new Image("icon.png");
         Button button = new Button("Click !");
         button.setOnAction(actionEvent -> {

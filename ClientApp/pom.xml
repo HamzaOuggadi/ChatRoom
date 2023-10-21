@@ -25,11 +25,6 @@
             <version>${javafx-controls.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx-fxml.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
