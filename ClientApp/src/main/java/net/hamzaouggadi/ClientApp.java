@@ -30,7 +30,7 @@ public class ClientApp extends Application {
 
         ClientApp clientApp = new ClientApp();
         try {
-            clientApp.networkSetup = new NetworkSetup(new InetSocketAddress(8080));
+            clientApp.networkSetup = new NetworkSetup(new InetSocketAddress("127.0.0.1",8080));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

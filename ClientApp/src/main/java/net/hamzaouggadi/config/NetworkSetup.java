@@ -9,18 +9,21 @@ public class NetworkSetup {
     private final InetSocketAddress serverAddress;
     private final SocketChannel socketChannel;
     private final int serverPort;
+    private final String serverIP;
 
 
-    public NetworkSetup(int serverPort) throws IOException {
+    public NetworkSetup(String serverIP, int serverPort) throws IOException {
         this.serverAddress = new InetSocketAddress(serverPort);
         this.socketChannel = SocketChannel.open(serverAddress);
         this.serverPort = serverPort;
+        this.serverIP = serverIP;
     }
 
     public NetworkSetup(InetSocketAddress serverAddress) throws IOException {
         this.serverAddress = serverAddress;
         this.socketChannel = SocketChannel.open(serverAddress);
         this.serverPort = serverAddress.getPort();
+        this.serverIP = serverAddress.getHostName();
     }
 
 
