@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.nio.channels.Channels;
+import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 
 public class ClientApp extends Application {
@@ -28,30 +29,48 @@ public class ClientApp extends Application {
 
     public static void main(String[] args) {
 
-        ClientApp clientApp = new ClientApp();
+
+
+/*
+        clientApp.setupWriter();
+*/
+
+
+
+
+
+        launch(args);
+
+    }
+
+/*    public void setupWriter() {
+        writer = new PrintWriter(Channels.newWriter(networkSetup.getSocketChannel(), StandardCharsets.UTF_8));
+    }*/
+
+    public void setWriter2(SocketChannel clientSocket) {
+        writer = new PrintWriter(Channels.newWriter(clientSocket, StandardCharsets.UTF_8));
+    }
+
+
+    public void setupNetwork() {
+
         try {
-            clientApp.networkSetup = new NetworkSetup(new InetSocketAddress("127.0.0.1",8080));
+            InetSocketAddress serverAddress = new InetSocketAddress("127.0.0.1", 8080);
+            SocketChannel clientSocket = SocketChannel.open(serverAddress);
+            reader = new BufferedReader(Channels.newReader(clientSocket, StandardCharsets.UTF_8));
+
+            setWriter2(clientSocket);
+
+            System.out.println("Network Established");
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        clientApp.setUpReader();;
-        clientApp.setupWriter();
-
-
-
-
-        launch();
-    }
-
-    public void setUpReader() {
-        reader = new BufferedReader(Channels.newReader(networkSetup.getSocketChannel(), StandardCharsets.UTF_8));
-    }
-
-    public void setupWriter() {
-        writer = new PrintWriter(Channels.newWriter(networkSetup.getSocketChannel(), StandardCharsets.UTF_8));
     }
 
     public void sendMessage() {
+        System.out.println("SendMessage Method : " + writer);
         writer.println(messageTextField.getText());
         writer.flush();
         messageTextField.setText("");
@@ -59,6 +78,24 @@ public class ClientApp extends Application {
 
     @Override
     public void start(Stage stage) {
+
+
+        try {
+            InetSocketAddress serverAddress = new InetSocketAddress("127.0.0.1", 8080);
+            SocketChannel clientSocket = SocketChannel.open(serverAddress);
+            reader = new BufferedReader(Channels.newReader(clientSocket, StandardCharsets.UTF_8));
+            writer = new PrintWriter(Channels.newWriter(clientSocket, StandardCharsets.UTF_8));
+            setWriter2(clientSocket);
+
+            System.out.println("Network Established");
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
         Image icon = new Image("icon.png");
 
         VBox parentVBox = new VBox();
