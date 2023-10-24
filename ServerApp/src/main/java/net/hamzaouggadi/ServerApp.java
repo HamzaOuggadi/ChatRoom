@@ -3,6 +3,7 @@ package net.hamzaouggadi;
 
 
 
+import net.hamzaouggadi.config.AppProperties;
 import net.hamzaouggadi.config.ClientHandler;
 import net.hamzaouggadi.config.NetworkConfig;
 

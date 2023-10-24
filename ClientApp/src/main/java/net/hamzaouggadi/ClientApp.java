@@ -81,7 +81,7 @@ public class ClientApp extends Application {
 
 
         try {
-            InetSocketAddress serverAddress = new InetSocketAddress("127.0.0.1", 8080);
+            InetSocketAddress serverAddress = new InetSocketAddress("oddest.ddns.net", 8080);
             SocketChannel clientSocket = SocketChannel.open(serverAddress);
             reader = new BufferedReader(Channels.newReader(clientSocket, StandardCharsets.UTF_8));
             writer = new PrintWriter(Channels.newWriter(clientSocket, StandardCharsets.UTF_8));
